@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로컬브랜 - 지역의 가치를 브랜드로</title>
+    <style>
+        /* ===== 기본 설정 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== 공통 스타일 ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2d3748;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
+            color: #718096;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== 히어로 섹션 ===== */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: none;
+            opacity: 1;
+            transform: none;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0); }
+            to { transform: translate(-50px, -50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .hero .description {
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .emoji-decoration {
+            font-size: 3em;
+            margin: 20px 10px;
+            display: inline-block;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .emoji-decoration:nth-child(2) { animation-delay: 0.2s; }
+        .emoji-decoration:nth-child(3) { animation-delay: 0.4s; }
+        .emoji-decoration:nth-child(4) { animation-delay: 0.6s; }
+        .emoji-decoration:nth-child(5) { animation-delay: 0.8s; }
+
+        /* ===== 버튼 스타일 ===== */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* ===== 문제 제시 섹션 ===== */
+        .problem {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .problem-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .problem-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .problem-card p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* ===== 솔루션 섹션 ===== */
+        .solution {
+            background: #f7fafc;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .solution-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .solution-emoji {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .solution-card h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .solution-card p {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        /* ===== 서비스 섹션 ===== */
+        .services {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .service-emoji {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .service-card p {
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .service-detail-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .service-detail-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ===== 모달 스타일 ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .modal-section {
+            margin: 25px 0;
+        }
+
+        .modal-section h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .modal-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .modal-list li {
+            padding: 10px 0;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .modal-list li:before {
+            content: '✓';
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* ===== 프로세스 섹션 ===== */
+        .process {
+            background: #f7fafc;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .step-number {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .process-step h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .process-step p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* ===== 특장점 섹션 ===== */
+        .features {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .feature-card:hover h3,
+        .feature-card:hover p {
+            color: white;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #2d3748;
+            transition: color 0.3s ease;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+            line-height: 1.7;
+            transition: color 0.3s ease;
+        }
+
+        /* ===== 가격 섹션 ===== */
+        .pricing {
+            background: #f7fafc;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .pricing-card.featured {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .plan-emoji {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        .plan-name {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .plan-price {
+            font-size: 2.5em;
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 12px 0;
+            color: #4a5568;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .plan-features li:before {
+            content: '✓';
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .plan-cta {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .plan-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* ===== FAQ 섹션 ===== */
+        .faq {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f7fafc;
+        }
+
+        .faq-question:before {
+            content: '❓';
+            margin-right: 15px;
+            font-size: 1.3em;
+        }
+
+        .faq-toggle {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            padding: 0 25px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 25px 25px;
+        }
+
+        .faq-answer p {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        /* ===== 최종 CTA 섹션 ===== */
+        .final-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .final-cta h2 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 25px;
+        }
+
+        .final-cta p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .final-cta .emoji-decoration {
+            font-size: 2.5em;
+        }
+
+        /* ===== 푸터 ===== */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-slogan {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .footer-contact {
+            margin-bottom: 30px;
+        }
+
+        .footer-contact p {
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        .footer-contact a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: #f093fb;
+        }
+
+        .footer-social {
+            margin-bottom: 30px;
+        }
+
+        .social-link {
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        /* ===== 맨 위로 버튼 ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        /* ===== 반응형 디자인 ===== */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2em;
+            }
+
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2em;
+            }
+
+            .hero .description {
+                font-size: 1em;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .problem-grid,
+            .solution-grid,
+            .services-grid,
+            .process-steps,
+            .features-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .modal-content {
+                margin: 10% 20px;
+                padding: 30px 20px;
+            }
+
+            .emoji-decoration {
+                font-size: 2em;
+                margin: 10px 5px;
+            }
+
+            .final-cta h2 {
+                font-size: 2em;
+            }
+
+            .final-cta p {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .problem-grid,
+            .services-grid,
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .solution-grid,
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🏡 로컬브랜</h1>
+            <p class="subtitle">지역의 가치를 브랜드로, 청년의 꿈을 현실로</p>
+            <p class="description">지역의 숨겨진 자원과 청년 전문가를 연결하여, 외부 시장을 겨냥한 로컬 브랜드를 창조합니다. 기획부터 디자인, 마케팅까지 원스톱 솔루션을 제공합니다.</p>
+            
+            <div>
+                <span class="emoji-decoration">🌄</span>
+                <span class="emoji-decoration">💡</span>
+                <span class="emoji-decoration">🤝</span>
+                <span class="emoji-decoration">🚀</span>
+                <span class="emoji-decoration">✨</span>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#services" class="cta-button">서비스 소개 보기</a>
+                <a href="https://forms.gle/YOUR_FORM_LINK" target="_blank" class="cta-button secondary">무료 상담 신청</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 문제 제시 섹션 -->
+    <section class="problem">
+        <div class="container">
+            <h2>🤔 왜 로컬브랜이 필요한가요?</h2>
+            <p class="section-subtitle">지방 도시가 직면한 현실, 우리가 함께 풀어가야 할 과제입니다</p>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📉</div>
+                    <h3>청년 유출의 악순환</h3>
+                    <p>일자리 부족으로 청년들이 도시를 떠나고, 지역 경제는 더욱 위축되는 악순환이 반복되고 있습니다. 지역의 인재들이 자신의 고향에서 꿈을 펼칠 기회가 필요합니다.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">💎</div>
+                    <h3>활용되지 못하는 지역 자원</h3>
+                    <p>지역마다 고유한 문화, 특산물, 자연환경이 있지만 이를 상품화하고 브랜딩할 전문성이 부족합니다. 가치 있는 자원들이 그저 잠들어 있을 뿐입니다.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">🎯</div>
+                    <h3>시장 접근의 어려움</h3>
+                    <p>좋은 아이디어와 제품이 있어도 마케팅 노하우 부족으로 외부 시장에 진입하지 못합니다. 전문적인 브랜딩과 홍보 전략이 절실합니다.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">🏘️</div>
+                    <h3>지역 소멸 위기</h3>
+                    <p>인구 감소와 경제 침체로 지역 공동체가 무너지고 있습니다. 지속 가능한 지역 경제 생태계 구축이 시급한 상황입니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 솔루션 섹션 -->
+    <section class="solution">
+        <div class="container">
+            <h2>💡 로컬브랜의 해결책</h2>
+            <p class="section-subtitle">지역과 청년, 그리고 시장을 연결하는 통합 솔루션</p>
+            
+            <div class="solution-grid">
+                <div class="solution-card">
+                    <span class="solution-emoji">🔍</span>
+                    <h3>지역 자원 발굴 및 분석</h3>
+                    <p>지역의 숨겨진 보석을 찾아냅니다. 특산물, 문화유산, 자연환경, 청년 인재 등 지역만의 고유한 자원을 체계적으로 발굴하고 시장성을 분석합니다. 데이터 기반의 시장 조사를 통해 가장 경쟁력 있는 자원을 선별하고, 이를 상품화할 수 있는 구체적인 방향을 제시합니다.</p>
+                </div>
+
+                <div class="solution-card">
+                    <span class="solution-emoji">🎨</span>
+                    <h3>브랜드 개발 및 디자인</h3>
+                    <p>지역의 이야기를 매력적인 브랜드로 만듭니다. 전문 디자이너와 기획자가 협업하여 타
